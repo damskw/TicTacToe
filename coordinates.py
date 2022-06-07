@@ -1,9 +1,8 @@
-def get_human_coordinates(board, current_player):
+def get_human_coordinates():
   coordinates = input("Please provide coordinates.")
   row = int(coordinates[0])
   column = int(coordinates[1])
-  board[row][column] = current_player
-  return board
+  return row, column
 
   """
   Should return the read coordinates for the tic tac toe board from the terminal.

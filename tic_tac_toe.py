@@ -17,15 +17,14 @@ def main():
         if game_mode == HUMAN_VS_HUMAN:
             while current_player == " X ":
                 display_board(board)
-                get_human_coordinates(board, current_player)
+                row, column = get_human_coordinates()
+                board[row][column] = current_player
                 current_player = " O "
             while current_player == " O ":
                 display_board(board)
-                get_human_coordinates(board, current_player)
+                row, column = get_human_coordinates()
+                board[row][column] = current_player
                 current_player = " X "
-
-
-        # current_player = 'X'
         
         ### TO DO ###
         # based on the value of the variables `game_mode` and `current_player` 
