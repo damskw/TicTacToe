@@ -15,7 +15,6 @@ def main():
     while is_game_running:
         display_board(board)
 
-
         is_game_running = False
         ### TO DO ###
         # in each new iteration of the while loop the program should 

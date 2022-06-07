@@ -17,19 +17,39 @@ def check_menu_input(selected_option):
     return False
   return True
 
-def get_menu_option():
-  is_menu_presented = True
-  while is_menu_presented:
-    selected_option = input("Please choose one of the following options:\n"
+def show_menu():
+  selected_option = input("Please choose one of the following options:\n"
                     "1. Human vs Human\n"
                     "2. Random AI vs Random AI\n"
                     "3. Human vs Random AI\n"
                     "4. Human vs Unbeatable AI\n")
-    is_valid_input = check_menu_input(selected_option)
+  return selected_option
+
+def show_error_menu():
+  selected_option = input("Please choose one of the following options:\n"
+                    "1. Human vs Human\n"
+                    "2. Random AI vs Random AI\n"
+                    "3. Human vs Random AI\n"
+                    "4. Human vs Unbeatable AI\n"
+                    + TextColors.RED + 
+                    "\tError: Incorect value. Please provide numbers 1-4\n" 
+                    + TextColors.END)
+  return selected_option
+
+def get_menu_option():
+  is_menu_presented = True
+  is_wrong_input = False
+  while is_menu_presented:
+    if not is_wrong_input:
+      selected_option = show_menu()
+      is_valid_input = check_menu_input(selected_option)
+    else:
+      selected_option = show_error_menu()
+      is_valid_input = check_menu_input(selected_option)
     if is_valid_input:
       is_menu_presented = False
     else:
       clear()
-      print(TextColors.RED + "\tError: Incorect value. Please provide numbers 1-4" + TextColors.END)
+      is_wrong_input = True
   clear()
   return selected_option
