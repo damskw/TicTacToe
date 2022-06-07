@@ -1,6 +1,6 @@
 from board import display_board, get_empty_board, is_board_full, get_winning_player
 from coordinates import get_human_coordinates, get_random_ai_coordinates, get_unbeatable_ai_coordinates
-from menu import get_menu_option, clear
+from menu import get_menu_option, clear, get_players_names
 from os import system, name
 
 HUMAN_VS_HUMAN = 1
@@ -15,11 +15,12 @@ def main():
     current_player = " X "
     while is_game_running:
         if game_mode == HUMAN_VS_HUMAN:
-            
+            player_one, player_two = get_players_names()
+            clear()
             while current_player == " X ":
                 if not is_board_full(board): 
                     display_board(board)
-                    row, column = get_human_coordinates(board, current_player)
+                    row, column = get_human_coordinates(board, player_one)
                     board[row][column] = current_player
                     current_player = " O "
                 else:
@@ -30,7 +31,7 @@ def main():
             while current_player == " O ":
                 if not is_board_full(board):
                     display_board(board)
-                    row, column = get_human_coordinates(board, current_player)
+                    row, column = get_human_coordinates(board, player_two)
                     board[row][column] = current_player
                     current_player = " X "
                 else:

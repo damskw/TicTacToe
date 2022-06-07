@@ -23,7 +23,7 @@ def check_coordinates_input(coordinates):
     return False
   return True
 
-def get_human_coordinates(board, current_player):
+def get_human_coordinates(board, player_name):
   is_menu_presented = True
   is_wrong_input = False
   A = rows()[0]
@@ -31,7 +31,7 @@ def get_human_coordinates(board, current_player):
   C = rows()[2]
   while is_menu_presented:
     if not is_wrong_input:
-      coordinates = input(f"{current_player}, please enter coordinates: ")
+      coordinates = input(f"{player_name}, please enter coordinates: ")
       is_valid_input = check_coordinates_input(coordinates)
     else:
       coordinates = input(TextColors.RED + 

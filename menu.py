@@ -53,3 +53,9 @@ def get_menu_option():
       is_wrong_input = True
   clear()
   return int(selected_option)
+
+def get_players_names():
+  player_one = input("You've chosen Human vs Human.\n"
+                    "Please enter name for the first player: ")
+  player_two = input("Great! Now enter name for the second player: ")
+  return player_one, player_two
