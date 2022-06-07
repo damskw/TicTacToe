@@ -4,6 +4,9 @@ from menu import clear
 class TextColors:
   RED = '\033[91m'
   END = '\033[0m'
+  YELLOW = '\033[93m'
+  BOLD = '\033[1m'
+  GREEN = '\033[92m'
 
 def rows():
   A = "A".upper().lower()
@@ -26,34 +29,55 @@ def check_coordinates_input(coordinates):
     return False
   return True
 
-def get_human_coordinates(board, player_name):
-  is_menu_presented = True
-  is_wrong_input = False
+def check_free_coordinates(board, row, column):
+  if board[row][column] != ' . ':
+    return False
+  return True
+
+def row_input_change(coordinates):
   A = rows()[0]
   B = rows()[1]
   C = rows()[2]
-  while is_menu_presented:
-    if not is_wrong_input:
-      coordinates = input(f"{player_name}, please enter coordinates: ")
-      is_valid_input = check_coordinates_input(coordinates)
-    else:
-      coordinates = input(TextColors.RED + 
-                    "Invalid coordinates, please try again. "
-                    + TextColors.END)
-      is_valid_input = check_coordinates_input(coordinates)  
-    if is_valid_input:
-      is_menu_presented = False
-    else:
-      clear()
-      display_board(board)
-      is_wrong_input = True
   if coordinates[0] == A:
     row = 0
   elif coordinates[0] == B:
     row = 1
   elif coordinates[0] == C:
     row = 2
-  column = int(coordinates[1]) - 1
+  return row
+
+def get_human_coordinates(board, player_name):
+  is_menu_presented = True
+  is_wrong_input = False
+  are_coordinates_taken = False
+  while is_menu_presented:
+    if not is_wrong_input and not are_coordinates_taken:
+      coordinates = input(f"{player_name}, please enter coordinates: ")
+      is_valid_input = check_coordinates_input(coordinates)
+    elif is_wrong_input:
+      coordinates = input(TextColors.RED + 
+                    "Invalid coordinates, please try again. "
+                    + TextColors.END)
+      is_valid_input = check_coordinates_input(coordinates)  
+    elif are_coordinates_taken:
+      coordinates = input(TextColors.RED + 
+                    "These coordinates are already taken, please try again. "
+                    + TextColors.END)
+      is_valid_input = check_coordinates_input(coordinates) 
+    if is_valid_input:
+      row = row_input_change(coordinates)
+      column = int(coordinates[1]) - 1
+      is_valid_coordinates = check_free_coordinates(board, row, column)
+      if is_valid_coordinates:
+        is_menu_presented = False
+      else:
+        clear()
+        display_board(board)
+        are_coordinates_taken = True
+    else:
+      clear()
+      display_board(board)
+      is_wrong_input = True
   clear()
   return row, column
 

@@ -9,7 +9,7 @@ HUMAN_VS_RANDOM_AI = 3
 HUMAN_VS_UNBEATABLE_AI = 4
 
 def main():
-    game_mode = get_menu_option() # Returns int value of chosen game option
+    game_mode = get_menu_option()
     board = get_empty_board()
     is_game_running = True
     current_player = " X "
@@ -30,7 +30,7 @@ def main():
                         is_game_running = False
                         current_player = None
                         display_board(board)
-                        show_winning_message(wining_player)
+                        show_winning_message(player_one)
                     else:
                         current_player = " O "
                 else:
@@ -49,7 +49,7 @@ def main():
                         is_game_running = False
                         current_player = None
                         display_board(board)
-                        show_winning_message(wining_player)
+                        show_winning_message(player_two)
                     else:
                         current_player = " X "
                 else:

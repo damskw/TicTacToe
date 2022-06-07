@@ -3,6 +3,9 @@ from os import system, name
 class TextColors:
   RED = '\033[91m'
   END = '\033[0m'
+  YELLOW = '\033[93m'
+  BOLD = '\033[1m'
+  GREEN = '\033[92m'
 
 def clear():
   if name == 'nt':

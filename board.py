@@ -1,5 +1,10 @@
 from re import L
-
+class TextColors:
+  RED = '\033[91m'
+  END = '\033[0m'
+  YELLOW = '\033[93m'
+  BOLD = '\033[1m'
+  GREEN = '\033[92m'
 
 def get_empty_board():
     empty_board = [
@@ -20,7 +25,7 @@ def display_board(board):
   print("   ---+---+---")
 
 def full_board_message():
-  print("I'm sorry, the board is full!")
+  print("\t There's no more space to move! The game has ended with a tie. ")
 
 def is_board_full(board):
   if " . " in board[0]:
@@ -32,7 +37,12 @@ def is_board_full(board):
   return True
 
 def show_winning_message(winning_player):
-  print(f"Congratulations {winning_player}, you have won the game!")
+  print(TextColors.GREEN + 
+        "\tCongratulations," + 
+        TextColors.BOLD +
+        winning_player + 
+        TextColors.END + 
+         "You have won this game! ")
 
 
 def get_winning_player(board, current_player):
