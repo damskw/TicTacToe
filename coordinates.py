@@ -1,7 +1,57 @@
-def get_human_coordinates():
-  coordinates = input("Please provide coordinates.")
-  row = int(coordinates[0])
-  column = int(coordinates[1])
+from board import display_board
+from menu import clear
+
+class TextColors:
+  RED = '\033[91m'
+  END = '\033[0m'
+
+def rows():
+  A = "A".upper().lower()
+  B = "B".upper().lower()
+  C = "C".upper().lower()
+  return A, B, C
+
+def check_coordinates_input(coordinates):
+  A = rows()[0]
+  B = rows()[1]
+  C = rows()[2]
+  if len(coordinates) > 2 or len(coordinates) < 2:
+    return False
+  if int(coordinates[1]) > 3 or int(coordinates[1]) < 1:
+    return False
+  if coordinates[0] != A and coordinates[0] != B and coordinates[0] != C:
+    return False
+  return True
+
+def get_human_coordinates(board, current_player):
+  is_menu_presented = True
+  is_wrong_input = False
+  A = rows()[0]
+  B = rows()[1]
+  C = rows()[2]
+  while is_menu_presented:
+    if not is_wrong_input:
+      coordinates = input(f"{current_player}, please enter coordinates: ")
+      is_valid_input = check_coordinates_input(coordinates)
+    else:
+      coordinates = input(TextColors.RED + 
+                    "Invalid coordinates, please try again. "
+                    + TextColors.END)
+      is_valid_input = check_coordinates_input(coordinates)  
+    if is_valid_input:
+      is_menu_presented = False
+    else:
+      clear()
+      display_board(board)
+      is_wrong_input = True
+  if coordinates[0] == A:
+    row = 0
+  elif coordinates[0] == B:
+    row = 1
+  elif coordinates[0] == C:
+    row = 2
+  column = int(coordinates[1]) - 1
+  clear()
   return row, column
 
   """

@@ -15,16 +15,28 @@ def main():
     current_player = " X "
     while is_game_running:
         if game_mode == HUMAN_VS_HUMAN:
+            
             while current_player == " X ":
-                display_board(board)
-                row, column = get_human_coordinates()
-                board[row][column] = current_player
-                current_player = " O "
+                if not is_board_full(board): 
+                    display_board(board)
+                    row, column = get_human_coordinates(board, current_player)
+                    board[row][column] = current_player
+                    current_player = " O "
+                else:
+                    display_board(board)
+                    is_game_running = False
+                    current_player = None
+
             while current_player == " O ":
-                display_board(board)
-                row, column = get_human_coordinates()
-                board[row][column] = current_player
-                current_player = " X "
+                if not is_board_full(board):
+                    display_board(board)
+                    row, column = get_human_coordinates(board, current_player)
+                    board[row][column] = current_player
+                    current_player = " X "
+                else:
+                    display_board(board)
+                    is_game_running = False
+                    current_player = None
         
         ### TO DO ###
         # based on the value of the variables `game_mode` and `current_player` 
