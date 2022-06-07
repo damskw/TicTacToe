@@ -1,4 +1,4 @@
-from board import display_board, get_empty_board, is_board_full, get_winning_player
+from board import display_board, get_empty_board, is_board_full, get_winning_player, full_board_message, show_winning_message
 from coordinates import get_human_coordinates, get_random_ai_coordinates, get_unbeatable_ai_coordinates
 from menu import get_menu_option, clear, get_players_names
 from os import system, name
@@ -13,18 +13,29 @@ def main():
     board = get_empty_board()
     is_game_running = True
     current_player = " X "
+    welcome = True
     while is_game_running:
         if game_mode == HUMAN_VS_HUMAN:
-            player_one, player_two = get_players_names()
-            clear()
+            if welcome == True:
+                player_one, player_two = get_players_names()
+                welcome = False
+                clear()
             while current_player == " X ":
                 if not is_board_full(board): 
                     display_board(board)
                     row, column = get_human_coordinates(board, player_one)
                     board[row][column] = current_player
-                    current_player = " O "
+                    wining_player = get_winning_player(board, current_player)
+                    if wining_player == current_player:
+                        is_game_running = False
+                        current_player = None
+                        display_board(board)
+                        show_winning_message(wining_player)
+                    else:
+                        current_player = " O "
                 else:
                     display_board(board)
+                    full_board_message()
                     is_game_running = False
                     current_player = None
 
@@ -33,9 +44,17 @@ def main():
                     display_board(board)
                     row, column = get_human_coordinates(board, player_two)
                     board[row][column] = current_player
-                    current_player = " X "
+                    wining_player = get_winning_player(board, current_player)
+                    if wining_player == current_player:
+                        is_game_running = False
+                        current_player = None
+                        display_board(board)
+                        show_winning_message(wining_player)
+                    else:
+                        current_player = " X "
                 else:
                     display_board(board)
+                    full_board_message()
                     is_game_running = False
                     current_player = None
         
@@ -44,18 +63,6 @@ def main():
         # the programm should should choose betwen the functions
         # get_random_ai_coordinates or get_umbeatable_ai_coordinates or get_human_coordinates
 
-
-        # x, y = get_human_coordinates(board, current_player)
-        
-        # board[x][y] = current_player
-        
-        ### TO DO ###
-        # based on the values of `winning_player` and `its_a_tie` the program
-        # should either stop displaying a winning/tie message 
-        # OR continue the while loop
-
-
-        # winning_player = get_winning_player(board)
         # its_a_tie = is_board_full(board)
 
 

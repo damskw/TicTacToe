@@ -1,3 +1,6 @@
+from re import L
+
+
 def get_empty_board():
     empty_board = [
     [" . ", " . ", " . "],
@@ -16,6 +19,8 @@ def display_board(board):
   print("C  " + board[2][0] + "|" + board[2][1] + "|" + board[2][2])
   print("   ---+---+---")
 
+def full_board_message():
+  print("I'm sorry, the board is full!")
 
 def is_board_full(board):
   if " . " in board[0]:
@@ -26,14 +31,54 @@ def is_board_full(board):
     return False
   return True
 
+def show_winning_message(winning_player):
+  print(f"Congratulations {winning_player}, you have won the game!")
 
 
-def get_winning_player(board):
-  """
-  Should return the player that wins based on the tic tac toe rules.
-  If no player has won, than "None" is returned.
-  """
-  pass
+def get_winning_player(board, current_player):
+  first_row = board[0][0] == board[0][1] == board[0][2] != ' . '
+  second_row = board[1][0] == board[1][1] == board[1][2] != ' . '
+  third_row = board[2][0] == board[2][1] == board[2][2] != ' . '
+  frist_across = board[0][0] == board[1][1] == board[2][2] != ' . '
+  second_across = board[0][2] == board[1][1] == board[2][0] != ' . '
+  down_the_left_side = board[0][0] == board[1][0] == board[2][0] != ' . '
+  down_the_middle = board[0][1] == board[1][1] == board[2][1] != ' . '
+  down_the_right_side = board[0][2] == board[1][2] == board[2][2] != ' . '
+
+  if down_the_left_side:
+    winning_player = current_player
+    return winning_player
+  
+  if down_the_middle:
+    winning_player = current_player
+    return winning_player
+
+  if down_the_right_side:
+    winning_player = current_player
+    return winning_player
+
+  if first_row:
+    winning_player = current_player
+    return winning_player
+
+  if second_row:
+    winning_player = current_player
+    return winning_player
+
+  if third_row:
+    winning_player = current_player
+    return winning_player
+
+  if frist_across:
+    winning_player = current_player
+    return winning_player
+
+  if second_across:
+    winning_player = current_player
+    return winning_player
+
+  return None
+
 
 
 # run this file to test whether you have correctly implemented the functions
