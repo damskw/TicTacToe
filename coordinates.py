@@ -1,4 +1,10 @@
 def get_human_coordinates(board, current_player):
+  coordinates = input("Please provide coordinates.")
+  row = int(coordinates[0])
+  column = int(coordinates[1])
+  board[row][column] = current_player
+  return board
+
   """
   Should return the read coordinates for the tic tac toe board from the terminal.
   The coordinates should be in the format  letter, number where the letter is 
@@ -10,7 +16,6 @@ def get_human_coordinates(board, current_player):
   If the user enters the word "quit" in any format of capitalized letters the program
   should stop.
   """
-  pass
 
 
 def get_random_ai_coordinates(board, current_player):

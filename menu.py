@@ -52,4 +52,4 @@ def get_menu_option():
       clear()
       is_wrong_input = True
   clear()
-  return selected_option
+  return int(selected_option)

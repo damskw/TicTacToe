@@ -12,13 +12,17 @@ def main():
     game_mode = get_menu_option() # Returns int value of chosen game option
     board = get_empty_board()
     is_game_running = True
+    current_player = " X "
     while is_game_running:
-        display_board(board)
-
-        is_game_running = False
-        ### TO DO ###
-        # in each new iteration of the while loop the program should 
-        # alternate the value of `current_player` from `X` to `O`
+        if game_mode == HUMAN_VS_HUMAN:
+            while current_player == " X ":
+                display_board(board)
+                get_human_coordinates(board, current_player)
+                current_player = " O "
+            while current_player == " O ":
+                display_board(board)
+                get_human_coordinates(board, current_player)
+                current_player = " X "
 
 
         # current_player = 'X'
