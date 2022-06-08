@@ -38,11 +38,19 @@ def is_board_full(board):
 
 def show_winning_message(winning_player):
   print(TextColors.GREEN + 
-        "\tCongratulations," + 
+        "\tCongratulations, " + 
         TextColors.BOLD +
         winning_player + 
         TextColors.END + 
-         " You have won this game! ")
+         "! You have won this game! ")
+
+def show_AI_winning_message(player):
+  print(TextColors.RED + 
+        "\tYou have failed, " + 
+        TextColors.BOLD +
+        player + 
+        TextColors.END + 
+         "! AI has won this game! ")
 
 
 def get_winning_player(board, current_player):

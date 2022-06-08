@@ -81,3 +81,12 @@ def get_players_names():
                   "\tI'm sorry, name cannot be empty. Please try again. "
                   + TextColors.END)
   return player_one, player_two
+
+def get_one_player_name():
+  player_name = input("You've chosen Human vs AI.\n"
+                    "Please enter your name: ")
+  while len(player_name) == 0:
+    player_name = input(TextColors.RED + 
+                  "\tI'm sorry, name cannot be empty. Please try again. "
+                  + TextColors.END)
+  return player_name

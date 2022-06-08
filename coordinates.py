@@ -1,3 +1,4 @@
+import random
 from board import display_board
 from menu import clear
 
@@ -83,15 +84,18 @@ def get_human_coordinates(board, player_name):
   return row, column
 
 
-def get_random_ai_coordinates(board, current_player):
-  """
-  Should return a tuple of 2 numbers. 
-  Each number should be between 0-2.
-  The chosen number should be only a free coordinate from the board.
-  If the board is full (all spots taken by either X or O) than "None"
-  should be returned.
-  """
-  pass
+def get_random_ai_coordinates(board):
+  getting_coordinates = True
+  while getting_coordinates:
+    row = random.randint(0,2)
+    column = random.randint(0,2)
+    are_free_coordinates = check_free_coordinates(board, row, column)
+    if are_free_coordinates:
+      getting_coordinates = False
+      clear()
+      return row, column
+    else:
+      getting_coordinates = True
 
 
 def get_unbeatable_ai_coordinates(board, current_player):
