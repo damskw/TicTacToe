@@ -71,5 +71,13 @@ def get_menu_option():
 def get_players_names():
   player_one = input("You've chosen Human vs Human.\n"
                     "Please enter name for the first player: ")
+  while len(player_one) == 0:
+    player_one = input(TextColors.RED + 
+                  "\tI'm sorry, name cannot be empty. Please try again. "
+                  + TextColors.END)
   player_two = input("Great! Now enter name for the second player: ")
+  while len(player_two) == 0:
+    player_two = input(TextColors.RED + 
+                  "\tI'm sorry, name cannot be empty. Please try again. "
+                  + TextColors.END)
   return player_one, player_two
