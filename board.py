@@ -52,6 +52,9 @@ def show_AI_winning_message(player):
         TextColors.END + 
          "! AI has won this game! ")
 
+def show_AI_vs_AI_winning_message(player):
+  print(player + " has won this game.")
+
 
 def get_winning_player(board, current_player):
   first_row = board[0][0] == board[0][1] == board[0][2] != ' . '

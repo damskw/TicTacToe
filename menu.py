@@ -21,6 +21,9 @@ def check_menu_input(selected_option):
     return False
   return True
 
+def show_AI_vs_AI_welcome_message():
+  input("You have chosen AI vs AI mode. Watch AIs fight with each other! ")
+
 def show_menu():
   selected_option = input("Please choose one of the following options:\n"
                     "1. Human vs Human\n"
