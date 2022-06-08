@@ -74,13 +74,6 @@ def main():
                         main()
                     is_game_running = False
                     current_player = None
-        
-        ### TO DO ###
-        # based on the value of the variables `game_mode` and `current_player` 
-        # the programm should should choose betwen the functions
-        # get_random_ai_coordinates or get_umbeatable_ai_coordinates or get_human_coordinates
-
-        # its_a_tie = is_board_full(board)
 
 
 if __name__ == "__main__":
