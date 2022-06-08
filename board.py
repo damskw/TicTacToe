@@ -42,7 +42,7 @@ def show_winning_message(winning_player):
         TextColors.BOLD +
         winning_player + 
         TextColors.END + 
-         "You have won this game! ")
+         " You have won this game! ")
 
 
 def get_winning_player(board, current_player):

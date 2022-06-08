@@ -54,7 +54,7 @@ def get_human_coordinates(board, player_name):
     if not is_wrong_input and not are_coordinates_taken:
       coordinates = input(f"{player_name}, please enter coordinates: ")
       is_valid_input = check_coordinates_input(coordinates)
-    elif is_wrong_input:
+    elif is_wrong_input and not are_coordinates_taken:
       coordinates = input(TextColors.RED + 
                     "Invalid coordinates, please try again. "
                     + TextColors.END)
@@ -63,6 +63,7 @@ def get_human_coordinates(board, player_name):
       coordinates = input(TextColors.RED + 
                     "These coordinates are already taken, please try again. "
                     + TextColors.END)
+      are_coordinates_taken = False
       is_valid_input = check_coordinates_input(coordinates) 
     if is_valid_input:
       row = row_input_change(coordinates)
