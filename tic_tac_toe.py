@@ -1,6 +1,6 @@
 from board import display_board, get_empty_board, is_board_full, get_winning_player, full_board_message, show_winning_message
 from coordinates import get_human_coordinates, get_random_ai_coordinates, get_unbeatable_ai_coordinates
-from menu import get_menu_option, clear, get_players_names
+from menu import check_play_again, get_menu_option, clear, get_players_names
 from os import system, name
 
 HUMAN_VS_HUMAN = 1
@@ -15,6 +15,7 @@ def main():
     current_player = " X "
     welcome = True
     while is_game_running:
+
         if game_mode == HUMAN_VS_HUMAN:
             if welcome == True:
                 player_one, player_two = get_players_names()
@@ -31,11 +32,19 @@ def main():
                         current_player = None
                         display_board(board)
                         show_winning_message(player_one)
+                        play_again = check_play_again()
+                        if play_again:
+                            clear()
+                            main()
                     else:
                         current_player = " O "
                 else:
                     display_board(board)
                     full_board_message()
+                    play_again = check_play_again()
+                    if play_again:
+                        clear()
+                        main()
                     is_game_running = False
                     current_player = None
 
@@ -50,11 +59,19 @@ def main():
                         current_player = None
                         display_board(board)
                         show_winning_message(player_two)
+                        play_again = check_play_again()
+                        if play_again:
+                            clear()
+                            main()
                     else:
                         current_player = " X "
                 else:
                     display_board(board)
                     full_board_message()
+                    play_again = check_play_again()
+                    if play_again:
+                        clear()
+                        main()
                     is_game_running = False
                     current_player = None
         

@@ -1,4 +1,5 @@
 from os import system, name
+from xml.dom.minidom import Text
 
 class TextColors:
   RED = '\033[91m'
@@ -38,6 +39,16 @@ def show_error_menu():
                     "\tError: Incorect value. Please provide numbers 1-4\n" 
                     + TextColors.END)
   return selected_option
+
+def check_play_again():
+  decision = input("\tThe game has ended. Would you like to play again? (y/n) ")
+  while decision.lower() != "y" and decision.lower() != "n":
+    decision = input(TextColors.RED + 
+    "\tI'm sorry, I didn't get that! Would you like to play again? Yes or no? (y/n) "
+    + TextColors.END)
+  if decision.lower() == "n":
+    return False
+  return True
 
 def get_menu_option():
   is_menu_presented = True
