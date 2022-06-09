@@ -11,6 +11,10 @@ def show_logo():
   logo = pyfiglet.figlet_format("Tic Tac Toe")
   print(colored.yellow(logo))
 
+def goodbye():
+  goodbye = pyfiglet.figlet_format("Goodbye!")
+  print(colored.yellow(goodbye))
+
 def check_menu_input(selected_option):
   try:
     selected_option = int(selected_option)

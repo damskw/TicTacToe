@@ -1,6 +1,7 @@
+from time import sleep
 from board import display_board, get_empty_board, is_board_full, get_winning_player, full_board_message, show_AI_vs_AI_winning_message, show_AI_winning_message, show_winning_message
 from coordinates import get_human_coordinates, get_random_ai_coordinates, get_unbeatable_ai_coordinates
-from menu import check_play_again, get_menu_option, clear, get_one_player_name, get_players_names, show_AI_vs_AI_welcome_message, show_logo
+from menu import check_play_again, get_menu_option, clear, get_one_player_name, get_players_names, goodbye, show_AI_vs_AI_welcome_message, show_logo
 from os import system, name
 
 HUMAN_VS_HUMAN = 1
@@ -37,6 +38,8 @@ def main():
                         if play_again:
                             clear()
                             main()
+                        else:
+                            goodbye()
                     else:
                         current_player = " O "
                 else:
@@ -46,6 +49,7 @@ def main():
                     if play_again:
                         clear()
                         main()
+                    goodbye()
                     is_game_running = False
                     current_player = None
 
@@ -64,6 +68,8 @@ def main():
                         if play_again:
                             clear()
                             main()
+                        else:
+                            goodbye()
                     else:
                         current_player = " X "
                 else:
@@ -73,6 +79,7 @@ def main():
                     if play_again:
                         clear()
                         main()
+                    goodbye()
                     is_game_running = False
                     current_player = None
 
@@ -97,6 +104,8 @@ def main():
                             if play_again:
                                 clear()
                                 main()
+                            else:
+                                goodbye()
                         else:
                             current_player = " O "
                     else:
@@ -106,6 +115,7 @@ def main():
                         if play_again:
                             clear()
                             main()
+                        goodbye()
                         is_game_running = False
                         current_player = None
 
@@ -123,6 +133,8 @@ def main():
                             if play_again:
                                 clear()
                                 main()
+                            else:
+                                goodbye()
                         else:
                             display_board(board)
                             input("AI has moved. Acknowledge it's movement by pressing enter. ")
@@ -135,6 +147,7 @@ def main():
                         if play_again:
                             clear()
                             main()
+                        goodbye()
                         is_game_running = False
                         current_player = None
 
@@ -157,6 +170,8 @@ def main():
                             if play_again:
                                 clear()
                                 main()
+                            else:
+                                goodbye()
                         else:
                             display_board(board)
                             input("AI has moved. Acknowledge it's movement by pressing enter. ")
@@ -171,6 +186,7 @@ def main():
                             main()
                         is_game_running = False
                         current_player = None
+                        goodbye()
 
                 while current_player == " O ":
                     if not is_board_full(board):
@@ -186,6 +202,8 @@ def main():
                             if play_again:
                                 clear()
                                 main()
+                            else:
+                                goodbye()
                         else:
                             display_board(board)
                             input("AI has moved. Acknowledge it's movement by pressing enter. ")
@@ -200,6 +218,7 @@ def main():
                             main()
                         is_game_running = False
                         current_player = None
+                        goodbye()
 
 
 if __name__ == "__main__":
