@@ -1,13 +1,7 @@
 import random
 from board import display_board
 from menu import clear
-
-class TextColors:
-  RED = '\033[91m'
-  END = '\033[0m'
-  YELLOW = '\033[93m'
-  BOLD = '\033[1m'
-  GREEN = '\033[92m'
+from clint.textui import colored
 
 def rows():
   A = "A".upper().lower()
@@ -56,14 +50,12 @@ def get_human_coordinates(board, player_name):
       coordinates = input(f"{player_name}, please enter coordinates: ")
       is_valid_input = check_coordinates_input(coordinates)
     elif is_wrong_input and not are_coordinates_taken:
-      coordinates = input(TextColors.RED + 
-                    "Invalid coordinates, please try again. "
-                    + TextColors.END)
+      coordinates = input(colored.red 
+                    ("Invalid coordinates, please try again. "))
       is_valid_input = check_coordinates_input(coordinates)  
     elif are_coordinates_taken:
-      coordinates = input(TextColors.RED + 
-                    "These coordinates are already taken, please try again. "
-                    + TextColors.END)
+      coordinates = input(colored.red 
+                    ("These coordinates are already taken, please try again. "))
       are_coordinates_taken = False
       is_valid_input = check_coordinates_input(coordinates) 
     if is_valid_input:

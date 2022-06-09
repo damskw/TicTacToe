@@ -1,10 +1,5 @@
 from re import L
-class TextColors:
-  RED = '\033[91m'
-  END = '\033[0m'
-  YELLOW = '\033[93m'
-  BOLD = '\033[1m'
-  GREEN = '\033[92m'
+from clint.textui import colored
 
 def get_empty_board():
     empty_board = [
@@ -37,20 +32,18 @@ def is_board_full(board):
   return True
 
 def show_winning_message(winning_player):
-  print(TextColors.GREEN + 
-        "\tCongratulations, " + 
-        TextColors.BOLD +
-        winning_player + 
-        TextColors.END + 
-         "! You have won this game! ")
+  print(colored.green 
+        ("\tCongratulations, " + 
+        winning_player) +
+        colored.white 
+         ("! You have won this game! "))
 
 def show_AI_winning_message(player):
-  print(TextColors.RED + 
-        "\tYou have failed, " + 
-        TextColors.BOLD +
-        player + 
-        TextColors.END + 
-         "! AI has won this game! ")
+  print(colored.red 
+        ("\tYou have failed, ") + 
+        player +
+        colored.white 
+         ("! AI has won this game! "))
 
 def show_AI_vs_AI_winning_message(player):
   print(player + " has won this game.")

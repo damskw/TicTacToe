@@ -1,12 +1,6 @@
 from os import system, name
 from xml.dom.minidom import Text
-
-class TextColors:
-  RED = '\033[91m'
-  END = '\033[0m'
-  YELLOW = '\033[93m'
-  BOLD = '\033[1m'
-  GREEN = '\033[92m'
+from clint.textui import colored
 
 def clear():
   if name == 'nt':
@@ -38,17 +32,15 @@ def show_error_menu():
                     "2. Random AI vs Random AI\n"
                     "3. Human vs Random AI\n"
                     "4. Human vs Unbeatable AI\n"
-                    + TextColors.RED + 
-                    "\tError: Incorect value. Please provide numbers 1-4\n" 
-                    + TextColors.END)
+                    + colored.red 
+                    ("\tError: Incorect value. Please provide numbers 1-4\n"))
   return selected_option
 
 def check_play_again():
   decision = input("\tThe game has ended. Would you like to play again? (y/n) ")
   while decision.lower() != "y" and decision.lower() != "n":
-    decision = input(TextColors.RED + 
-    "\tI'm sorry, I didn't get that! Would you like to play again? Yes or no? (y/n) "
-    + TextColors.END)
+    decision = input(colored.red 
+    ("\tI'm sorry, I didn't get that! Would you like to play again? Yes or no? (y/n) "))
   if decision.lower() == "n":
     return False
   return True
@@ -75,21 +67,18 @@ def get_players_names():
   player_one = input("You've chosen Human vs Human.\n"
                     "Please enter name for the first player: ")
   while len(player_one) == 0:
-    player_one = input(TextColors.RED + 
-                  "\tI'm sorry, name cannot be empty. Please try again. "
-                  + TextColors.END)
+    player_one = input(colored.red 
+                  ("\tI'm sorry, name cannot be empty. Please try again. "))
   player_two = input("Great! Now enter name for the second player: ")
   while len(player_two) == 0:
-    player_two = input(TextColors.RED + 
-                  "\tI'm sorry, name cannot be empty. Please try again. "
-                  + TextColors.END)
+    player_two = input(colored.red 
+                  ("\tI'm sorry, name cannot be empty. Please try again. "))
   return player_one, player_two
 
 def get_one_player_name():
   player_name = input("You've chosen Human vs AI.\n"
                     "Please enter your name: ")
   while len(player_name) == 0:
-    player_name = input(TextColors.RED + 
-                  "\tI'm sorry, name cannot be empty. Please try again. "
-                  + TextColors.END)
+    player_name = input(colored.red 
+                  ("\tI'm sorry, name cannot be empty. Please try again. "))
   return player_name
