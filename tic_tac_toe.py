@@ -19,7 +19,7 @@ def main():
     welcome = True
     while is_game_running:
         if game_mode == HUMAN_VS_HUMAN:
-            if welcome == True:
+            if welcome:
                 player_one, player_two = get_players_names()
                 welcome = False
                 clear()
@@ -84,141 +84,144 @@ def main():
                     current_player = None
 
         if game_mode == HUMAN_VS_RANDOM_AI:
-                if welcome == True:
-                    human_player = get_one_player_name()
-                    AI_player = "AI"
-                    welcome = False
-                    clear()
-                while current_player == " X ":
-                    if not is_board_full(board): 
+            if welcome:
+                human_player = get_one_player_name()
+                AI_player = "AI"
+                welcome = False
+                clear()
+            while current_player == " X ":
+                if not is_board_full(board): 
+                    display_board(board)
+                    row, column = get_human_coordinates(board, human_player)
+                    board[row][column] = current_player
+                    wining_player = get_winning_player(board, current_player)
+                    if wining_player == current_player:
+                        is_game_running = False
+                        current_player = None
                         display_board(board)
-                        row, column = get_human_coordinates(board, human_player)
-                        board[row][column] = current_player
-                        wining_player = get_winning_player(board, current_player)
-                        if wining_player == current_player:
-                            is_game_running = False
-                            current_player = None
-                            display_board(board)
-                            show_winning_message(human_player)
-                            play_again = check_play_again()
-                            if play_again:
-                                clear()
-                                main()
-                            else:
-                                goodbye()
-                        else:
-                            current_player = " O "
-                    else:
-                        display_board(board)
-                        full_board_message()
+                        show_winning_message(human_player)
                         play_again = check_play_again()
                         if play_again:
                             clear()
                             main()
-                        goodbye()
-                        is_game_running = False
-                        current_player = None
+                        else:
+                            goodbye()
+                    else:
+                        current_player = " O "
+                else:
+                    display_board(board)
+                    full_board_message()
+                    play_again = check_play_again()
+                    if play_again:
+                        clear()
+                        main()
+                    goodbye()
+                    is_game_running = False
+                    current_player = None
 
-                while current_player == " O ":
-                    if not is_board_full(board):
-                        row, column = get_random_ai_coordinates(board)
-                        board[row][column] = current_player
-                        wining_player = get_winning_player(board, current_player)
-                        if wining_player == current_player:
-                            is_game_running = False
-                            current_player = None
-                            display_board(board)
-                            show_AI_winning_message(human_player)
-                            play_again = check_play_again()
-                            if play_again:
-                                clear()
-                                main()
-                            else:
-                                goodbye()
-                        else:
-                            display_board(board)
-                            input("AI has moved. Acknowledge it's movement by pressing enter. ")
-                            clear()
-                            current_player = " X "
-                    else:
+            while current_player == " O ":
+                if not is_board_full(board):
+                    row, column = get_random_ai_coordinates(board)
+                    board[row][column] = current_player
+                    wining_player = get_winning_player(board, current_player)
+                    if wining_player == current_player:
+                        is_game_running = False
+                        current_player = None
                         display_board(board)
-                        full_board_message()
+                        show_AI_winning_message(human_player)
                         play_again = check_play_again()
                         if play_again:
                             clear()
                             main()
-                        goodbye()
-                        is_game_running = False
-                        current_player = None
+                        else:
+                            goodbye()
+                    else:
+                        display_board(board)
+                        input("AI has moved. Acknowledge it's movement by pressing enter. ")
+                        clear()
+                        current_player = " X "
+                else:
+                    display_board(board)
+                    full_board_message()
+                    play_again = check_play_again()
+                    if play_again:
+                        clear()
+                        main()
+                    goodbye()
+                    is_game_running = False
+                    current_player = None
 
         if game_mode == RANDOM_AI_VS_RANDOM_AI:
-                if welcome == True:
-                    show_AI_vs_AI_welcome_message()
-                    welcome = False
-                    clear()
-                while current_player == " X ":
-                    if not is_board_full(board):
-                        row, column = get_random_ai_coordinates(board)
-                        board[row][column] = current_player
-                        wining_player = get_winning_player(board, current_player)
-                        if wining_player == current_player:
-                            is_game_running = False
-                            display_board(board)
-                            show_AI_vs_AI_winning_message(current_player)
-                            current_player = None
-                            play_again = check_play_again()
-                            if play_again:
-                                clear()
-                                main()
-                            else:
-                                goodbye()
-                        else:
-                            display_board(board)
-                            input("AI has moved. Acknowledge it's movement by pressing enter. ")
-                            clear()
-                            current_player = " O "
-                    else:
+            if welcome:
+                show_AI_vs_AI_welcome_message()
+                welcome = False
+                clear()
+            while current_player == " X ":
+                if not is_board_full(board):
+                    row, column = get_random_ai_coordinates(board)
+                    board[row][column] = current_player
+                    wining_player = get_winning_player(board, current_player)
+                    if wining_player == current_player:
+                        is_game_running = False
                         display_board(board)
-                        full_board_message()
+                        show_AI_vs_AI_winning_message(current_player)
+                        current_player = None
                         play_again = check_play_again()
                         if play_again:
                             clear()
                             main()
-                        is_game_running = False
-                        current_player = None
-                        goodbye()
+                        else:
+                            goodbye()
+                    else:
+                        display_board(board)
+                        input("AI has moved. Acknowledge it's movement by pressing enter. ")
+                        clear()
+                        current_player = " O "
+                else:
+                    display_board(board)
+                    full_board_message()
+                    play_again = check_play_again()
+                    if play_again:
+                        clear()
+                        main()
+                    is_game_running = False
+                    current_player = None
+                    goodbye()
 
-                while current_player == " O ":
-                    if not is_board_full(board):
-                        row, column = get_random_ai_coordinates(board)
-                        board[row][column] = current_player
-                        wining_player = get_winning_player(board, current_player)
-                        if wining_player == current_player:
-                            is_game_running = False
-                            display_board(board)
-                            show_AI_vs_AI_winning_message(current_player)
-                            current_player = None
-                            play_again = check_play_again()
-                            if play_again:
-                                clear()
-                                main()
-                            else:
-                                goodbye()
-                        else:
-                            display_board(board)
-                            input("AI has moved. Acknowledge it's movement by pressing enter. ")
-                            clear()
-                            current_player = " X "
-                    else:
+            while current_player == " O ":
+                if not is_board_full(board):
+                    row, column = get_random_ai_coordinates(board)
+                    board[row][column] = current_player
+                    wining_player = get_winning_player(board, current_player)
+                    if wining_player == current_player:
+                        is_game_running = False
                         display_board(board)
-                        full_board_message()
+                        show_AI_vs_AI_winning_message(current_player)
+                        current_player = None
                         play_again = check_play_again()
                         if play_again:
                             clear()
                             main()
-                        is_game_running = False
-                        current_player = None
-                        goodbye()
+                        else:
+                            goodbye()
+                    else:
+                        display_board(board)
+                        input("AI has moved. Acknowledge it's movement by pressing enter. ")
+                        clear()
+                        current_player = " X "
+                else:
+                    display_board(board)
+                    full_board_message()
+                    play_again = check_play_again()
+                    if play_again:
+                        clear()
+                        main()
+                    is_game_running = False
+                    current_player = None
+                    goodbye()
+
+        if game_mode == HUMAN_VS_UNBEATABLE_AI:
+            print("aa")
 
 
 if __name__ == "__main__":
