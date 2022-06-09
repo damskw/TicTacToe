@@ -1,5 +1,4 @@
 from os import system, name
-from xml.dom.minidom import Text
 from clint.textui import colored
 import pyfiglet
 
@@ -74,20 +73,32 @@ def get_menu_option():
 
 def get_players_names():
   player_one = input("You've chosen Human vs Human.\n"
-                    "Please enter name for the first player: ")
+                    "Please enter name for the first player (X): ")
   while len(player_one) == 0:
     player_one = input(colored.red 
                   ("\tI'm sorry, name cannot be empty. Please try again. "))
-  player_two = input("Great! Now enter name for the second player: ")
+
+  player_two = input("Great! Now enter name for the second player (O): ")
   while len(player_two) == 0:
     player_two = input(colored.red 
                   ("\tI'm sorry, name cannot be empty. Please try again. "))
+
   return player_one, player_two
 
-def get_one_player_name():
+def get_player_name_and_choice():
   player_name = input("You've chosen Human vs AI.\n"
                     "Please enter your name: ")
   while len(player_name) == 0:
     player_name = input(colored.red 
                   ("\tI'm sorry, name cannot be empty. Please try again. "))
-  return player_name
+
+  choice = input("Please enter your symbol: X or O? ")
+  while choice.upper() != "X" and choice.upper() != "O":
+    choice = input(colored.red
+                    ("\tPlease enter X or O. "))
+  if choice.upper() == "X":
+    choice = " X "
+  elif choice.upper() == "O":
+    choice = " O "
+
+  return player_name, choice
