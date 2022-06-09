@@ -1,10 +1,15 @@
 from os import system, name
 from xml.dom.minidom import Text
 from clint.textui import colored
+import pyfiglet
 
 def clear():
   if name == 'nt':
     _ = system('cls')
+
+def show_logo():
+  logo = pyfiglet.figlet_format("Tic Tac Toe")
+  print(colored.yellow(logo))
 
 def check_menu_input(selected_option):
   try:

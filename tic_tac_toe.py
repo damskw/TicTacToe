@@ -1,6 +1,6 @@
 from board import display_board, get_empty_board, is_board_full, get_winning_player, full_board_message, show_AI_vs_AI_winning_message, show_AI_winning_message, show_winning_message
 from coordinates import get_human_coordinates, get_random_ai_coordinates, get_unbeatable_ai_coordinates
-from menu import check_play_again, get_menu_option, clear, get_one_player_name, get_players_names, show_AI_vs_AI_welcome_message
+from menu import check_play_again, get_menu_option, clear, get_one_player_name, get_players_names, show_AI_vs_AI_welcome_message, show_logo
 from os import system, name
 
 HUMAN_VS_HUMAN = 1
@@ -10,6 +10,7 @@ HUMAN_VS_UNBEATABLE_AI = 4
 
 def main():
     clear()
+    show_logo()
     game_mode = get_menu_option()
     board = get_empty_board()
     is_game_running = True
