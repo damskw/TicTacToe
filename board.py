@@ -96,3 +96,17 @@ def get_winning_player(board, current_player):
     return None
 
   return None
+
+def won(board, current_player):
+  first_row = board[0][0] == current_player and board[0][1] == current_player and board[0][2] == current_player
+  second_row = board[1][0] == current_player and board[1][1] == current_player and board[1][2] == current_player
+  third_row = board[2][0] == current_player and board[2][1] == current_player and board[2][2] == current_player
+  frist_across = board[0][0] == current_player and board[1][1] == current_player and board[2][2] == current_player
+  second_across = board[0][2] == current_player and board[1][1] == current_player and board[2][0] == current_player
+  down_the_left_side = board[0][0] == current_player and board[1][0] == current_player and board[2][0] == current_player
+  down_the_middle = board[0][1] == current_player and board[1][1] == current_player and board[2][1] == current_player
+  down_the_right_side = board[0][2] == current_player and board[1][2] == current_player and board[2][2] == current_player
+
+  if first_row or second_row or third_row or frist_across or second_across or down_the_left_side or down_the_middle or down_the_right_side:
+    return True
+  return False

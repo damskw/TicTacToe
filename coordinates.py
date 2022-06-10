@@ -1,5 +1,5 @@
 import random
-from board import display_board
+from board import display_board, get_empty_board, won
 from menu import clear
 from clint.textui import colored
 
@@ -90,14 +90,23 @@ def get_random_ai_coordinates(board):
       getting_coordinates = True
 
 
-def get_unbeatable_ai_coordinates(board, current_player):
-  """
-  Should return a tuple of 2 numbers. 
-  Each number should be between 0-2.
-  The chosen number should be only a free coordinate from the board.
-  The chosen coordinate should always stop the other player from winning or
-  maximize the current player's chances to win.
-  If the board is full (all spots taken by either X or O) than "None"
-  should be returned.
-  """
+def get_empty_squares(board):
+  free_list = []
+  for row in range(0,3):
+    for col in range(0,3):
+      if board[row][col] == " . ":
+        free_list.append((row, col))
+  return free_list
+
+def minimax():
   pass
+
+def get_unbeatable_ai_coordinates():
+  pass
+
+
+def main():
+  pass
+
+if __name__ == "__main__":
+    main()
