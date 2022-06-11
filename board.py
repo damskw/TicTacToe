@@ -23,13 +23,14 @@ def full_board_message():
   print("\t There's no more space to move! The game has ended with a tie. ")
 
 def is_board_full(board):
-  if " . " in board[0]:
+  check = []
+  for row in range(3):
+    for col in range(3):
+      check.append(board[row][col])
+  if " . " not in check:
+    return True 
+  else:
     return False
-  elif " . " in board[1]:
-    return False
-  elif " . " in board[2]:
-    return False
-  return True
 
 def show_winning_message(winning_player):
   print(colored.green 
