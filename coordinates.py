@@ -3,6 +3,9 @@ from board import display_board, get_empty_board, won
 from menu import clear
 from clint.textui import colored
 
+HUMAN_PLAYER = " X "
+AI_PLAYER = " O "
+
 def rows():
   A = "A".upper().lower()
   B = "B".upper().lower()
@@ -95,18 +98,80 @@ def get_empty_squares(board):
   for row in range(0,3):
     for col in range(0,3):
       if board[row][col] == " . ":
-        free_list.append((row, col))
+        free_list.append(row * 3 + col)
   return free_list
 
-def minimax():
-  pass
+def minimax(board, player):
+  free = get_empty_squares(board)
+
+  game_over, score = terminal_state(board, free)
+  if game_over:
+    result = {'index': None, 'score': score}
+    return result
+
+  moves = []
+  for i in free:
+    move = {"index": None, "score": None}
+    move["index"] = i
+    
+    board[i // 3][i % 3] = player
+
+    if player == AI_PLAYER:
+      result = minimax(board, HUMAN_PLAYER)
+    else:
+      result = minimax(board, AI_PLAYER)
+    move["score"] = result["score"]
+    moves.append(move)
+
+    board[i // 3][i % 3] = move["index"]
+
+  if player == AI_PLAYER:
+    best_score = -10000
+    for i in moves:
+      if i["score"] > best_score:
+        best_score = i["score"]
+        best_move = i
+  else:
+    best_score = 10000
+    for i in moves:
+      if i["score"] < best_score:
+        best_score = i["score"]
+        best_move = i
+  return best_move
 
 def get_unbeatable_ai_coordinates():
   pass
 
+def terminal_state(board, free):
+  game_over = False
+  score = None
+
+  if won(board, HUMAN_PLAYER):
+    game_over = True
+    score = -10
+  
+  elif won(board, AI_PLAYER):
+    game_over = True
+    score = 10
+
+  elif not free:
+    game_over = True
+    score = 0
+
+  return game_over, score
 
 def main():
   pass
+  # lista = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+  # lista_lista = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
+  # i = 1
+  # print(lista[i])
+  # print(lista_lista[i//3][i%3])
+  # a = 2
+  # b = 2
+  # print(lista_lista[a][b])
+  # print(lista[a*3+b])
+  
 
 if __name__ == "__main__":
     main()

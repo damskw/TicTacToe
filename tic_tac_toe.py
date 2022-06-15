@@ -1,6 +1,6 @@
 from time import sleep
-from board import display_board, get_empty_board, is_board_full, get_winning_player, full_board_message, show_AI_vs_AI_winning_message, show_AI_winning_message, show_winning_message
-from coordinates import get_human_coordinates, get_random_ai_coordinates, minimax
+from board import display_board, get_dirty_board, get_empty_board, is_board_full, get_winning_player, full_board_message, show_AI_vs_AI_winning_message, show_AI_winning_message, show_winning_message
+from coordinates import get_empty_squares, get_human_coordinates, get_random_ai_coordinates, minimax
 from menu import check_play_again, get_menu_option, clear, get_player_name_and_choice, get_players_names, goodbye, show_AI_vs_AI_welcome_message, show_logo
 from os import system, name
 from clint.textui import colored
@@ -253,7 +253,12 @@ def main():
                     goodbye()
 
         if game_mode == HUMAN_VS_UNBEATABLE_AI:
-            print("UNDER DEVELOPMENT")
+            board = get_dirty_board()
+            test = get_empty_squares(board)
+            print(test)
+            current_player = " O "
+            choice = minimax(board, current_player)
+            print(choice)
             is_game_running = False
 
 
