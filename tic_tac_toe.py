@@ -1,6 +1,6 @@
 from time import sleep
-from board import display_board, get_empty_board, is_board_full, get_winning_player, full_board_message, show_AI_vs_AI_winning_message, show_AI_winning_message, show_winning_message
-from coordinates import get_human_coordinates, get_random_ai_coordinates, get_unbeatable_ai_coordinates, AI_PLAYERR, HUMAN_PLAY
+from board import display_board, get_empty_board, is_board_full, get_winning_player, full_board_message, show_AI_vs_AI_winning_message, show_AI_winning_message, show_winning_message, won
+from coordinates import get_empty_squares, get_human_coordinates, get_random_ai_coordinates
 from menu import check_play_again, get_menu_option, clear, get_player_name_and_choice, get_players_names, goodbye, show_AI_vs_AI_welcome_message, show_logo
 from os import system, name
 from clint.textui import colored
@@ -14,8 +14,6 @@ HUMAN_VS_UNBEATABLE_AI = 4
 
 
 def main():
-    global HUMAN_PLAY
-    global AI_PLAYERR
     clear()
     show_logo()
     game_mode = get_menu_option()
@@ -92,7 +90,7 @@ def main():
 
         if game_mode == HUMAN_VS_RANDOM_AI:
             if welcome:
-                human_player, choice = get_player_name_and_choice()
+                human_name, choice = get_player_name_and_choice()
                 current_player = choice
                 welcome = False
                 clear()
@@ -100,7 +98,7 @@ def main():
                 if not is_board_full(board): 
                     display_board(board)
                     if choice == " X ":
-                        row, column = get_human_coordinates(board, human_player)
+                        row, column = get_human_coordinates(board, human_name)
                     else:
                         row, column = get_random_ai_coordinates(board)
                         ai_has_moved = True
@@ -111,7 +109,7 @@ def main():
                         current_player = None
                         display_board(board)
                         if choice ==" X ":
-                            show_winning_message(human_player)
+                            show_winning_message(human_name)
                         else:
                             show_AI_winning_message()
                         play_again = check_play_again()
@@ -145,7 +143,7 @@ def main():
                 if not is_board_full(board):
                     display_board(board)
                     if choice == " O ":
-                        row, column = get_human_coordinates(board, human_player)
+                        row, column = get_human_coordinates(board, human_name)
                     else:
                         row, column = get_random_ai_coordinates(board)
                         ai_has_moved = True
@@ -156,9 +154,9 @@ def main():
                         current_player = None
                         display_board(board)
                         if choice == " O ":
-                            show_winning_message(human_player)
+                            show_winning_message(human_name)
                         else:
-                            show_AI_winning_message(human_player)
+                            show_AI_winning_message(human_name)
                         play_again = check_play_again()
                         if play_again:
                             clear()
@@ -257,15 +255,25 @@ def main():
 
         if game_mode == HUMAN_VS_UNBEATABLE_AI:
             if welcome:
-                human_player, choice = get_player_name_and_choice()
+                human_name, choice = get_player_name_and_choice()
                 current_player = choice
+                global AI_PLAYER
+                global HUMAN_PLAYER
+                AI_PLAYER = " X "
+                HUMAN_PLAYER = " O "
+                if choice.lower() == "x":
+                    AI_PLAYER = " O "
+                    HUMAN_PLAYER = " X "
+                elif choice.lower() == "o":
+                    AI_PLAYER = " X "
+                    HUMAN_PLAYER = " O "
                 welcome = False
                 clear()
             while current_player == " X ":
                 if not is_board_full(board): 
                     display_board(board)
                     if choice == " X ":
-                        row, column = get_human_coordinates(board, human_player)
+                        row, column = get_human_coordinates(board, human_name)
                     else:
                         row, column = get_unbeatable_ai_coordinates(board)
                         ai_has_moved = True
@@ -277,9 +285,9 @@ def main():
                         clear()
                         display_board(board)
                         if choice ==" X ":
-                            show_winning_message(human_player)
+                            show_winning_message(human_name)
                         else:
-                            show_AI_winning_message()
+                            show_AI_winning_message(human_name)
                         play_again = check_play_again()
                         if play_again:
                             clear()
@@ -311,7 +319,7 @@ def main():
                 if not is_board_full(board):
                     display_board(board)
                     if choice == " O ":
-                        row, column = get_human_coordinates(board, human_player)
+                        row, column = get_human_coordinates(board, human_name)
                     else:
                         row, column = get_unbeatable_ai_coordinates(board)
                         ai_has_moved = True
@@ -323,9 +331,9 @@ def main():
                         clear()
                         display_board(board)
                         if choice == " O ":
-                            show_winning_message(human_player)
+                            show_winning_message(human_name)
                         else:
-                            show_AI_winning_message(human_player)
+                            show_AI_winning_message(human_name)
                         play_again = check_play_again()
                         if play_again:
                             clear()
@@ -352,6 +360,70 @@ def main():
                     goodbye()
                     is_game_running = False
                     current_player = None
+
+def minimax(board, player):
+  free = get_empty_squares(board)
+
+  game_over, score = terminal_state(board, free)
+  if game_over:
+    result = {'index': None, 'score': score}
+    return result
+
+  moves = []
+  for i in free:
+    move = {"index": None, "score": None}
+    move["index"] = i
+    
+    board[i // 3][i % 3] = player
+
+    if player == AI_PLAYER:
+      result = minimax(board, HUMAN_PLAYER)
+    else:
+      result = minimax(board, AI_PLAYER)
+    move["score"] = result["score"]
+    moves.append(move)
+
+    board[i // 3][i % 3] = " . " #move["index"]
+
+  if player == AI_PLAYER:
+    best_score = -10000
+    for i in moves:
+      if i["score"] > best_score:
+        best_score = i["score"]
+        best_move = i
+  else:
+    best_score = 10000
+    for i in moves:
+      if i["score"] < best_score:
+        best_score = i["score"]
+        best_move = i
+  return best_move
+
+def get_unbeatable_ai_coordinates(board):
+  ai_choice = minimax(board, AI_PLAYER)
+  temp = ai_choice["index"]
+  row = temp // 3
+  column = temp % 3
+
+  return row, column
+
+def terminal_state(board, free):
+  game_over = False
+  score = None
+
+  if won(board, HUMAN_PLAYER):
+    game_over = True
+    score = -10
+  
+  elif won(board, AI_PLAYER):
+    game_over = True
+    score = 10
+
+  elif not free:
+    game_over = True
+    score = 0
+
+  return game_over, score
 
 if __name__ == "__main__":
     main()

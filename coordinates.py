@@ -3,8 +3,6 @@ from board import display_board, won
 from menu import clear
 from clint.textui import colored
 
-HUMAN_PLAY = " X "
-AI_PLAYERR = " O"
 
 def rows():
   A = "A".upper().lower()
@@ -101,70 +99,70 @@ def get_empty_squares(board):
         free_list.append(row * 3 + col)
   return free_list
 
-def minimax(board, player):
-  free = get_empty_squares(board)
+# def minimax(board, player):
+#   free = get_empty_squares(board)
 
-  game_over, score = terminal_state(board, free)
-  if game_over:
-    result = {'index': None, 'score': score}
-    return result
+#   game_over, score = terminal_state(board, free)
+#   if game_over:
+#     result = {'index': None, 'score': score}
+#     return result
 
-  moves = []
-  for i in free:
-    move = {"index": None, "score": None}
-    move["index"] = i
+#   moves = []
+#   for i in free:
+#     move = {"index": None, "score": None}
+#     move["index"] = i
     
-    board[i // 3][i % 3] = player
+#     board[i // 3][i % 3] = player
 
-    if player == AI_PLAYERR:
-      result = minimax(board, HUMAN_PLAY)
-    else:
-      result = minimax(board, AI_PLAYERR)
-    move["score"] = result["score"]
-    moves.append(move)
+#     if player == AI_PLAYER:
+#       result = minimax(board, HUMAN_PLAYER)
+#     else:
+#       result = minimax(board, AI_PLAYER)
+#     move["score"] = result["score"]
+#     moves.append(move)
 
-    board[i // 3][i % 3] = " . " #move["index"]
+#     board[i // 3][i % 3] = " . " #move["index"]
 
-  if player == AI_PLAYERR:
-    best_score = -10000
-    for i in moves:
-      if i["score"] > best_score:
-        best_score = i["score"]
-        best_move = i
-  else:
-    best_score = 10000
-    for i in moves:
-      if i["score"] < best_score:
-        best_score = i["score"]
-        best_move = i
-  return best_move
+#   if player == AI_PLAYER:
+#     best_score = -10000
+#     for i in moves:
+#       if i["score"] > best_score:
+#         best_score = i["score"]
+#         best_move = i
+#   else:
+#     best_score = 10000
+#     for i in moves:
+#       if i["score"] < best_score:
+#         best_score = i["score"]
+#         best_move = i
+#   return best_move
 
-def get_unbeatable_ai_coordinates(board):
-  ai_choice = minimax(board, AI_PLAYERR)
-  temp = ai_choice["index"]
-  row = temp // 3
-  column = temp % 3
+# def get_unbeatable_ai_coordinates(board):
+#   ai_choice = minimax(board, AI_PLAYER)
+#   temp = ai_choice["index"]
+#   row = temp // 3
+#   column = temp % 3
 
-  return row, column
+#   return row, column
 
 
-def terminal_state(board, free):
-  game_over = False
-  score = None
+# def terminal_state(board, free):
+#   game_over = False
+#   score = None
 
-  if won(board, HUMAN_PLAY):
-    game_over = True
-    score = -10
+#   if won(board, HUMAN_PLAYER):
+#     game_over = True
+#     score = -10
   
-  elif won(board, AI_PLAYERR):
-    game_over = True
-    score = 10
+#   elif won(board, AI_PLAYER):
+#     game_over = True
+#     score = 10
 
-  elif not free:
-    game_over = True
-    score = 0
+#   elif not free:
+#     game_over = True
+#     score = 0
 
-  return game_over, score
+#   return game_over, score
 
 def main():
   pass
