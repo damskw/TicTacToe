@@ -11,9 +11,9 @@ def get_empty_board():
 
 def get_dirty_board():
     dirty_board = [
-    [" X ", " X ", " . "],
-    [" O ", " . ", " . "],
-    [" X ", " X ", " O "],
+    [" X ", " O ", " . "],
+    [" X ", " O ", " . "],
+    [" . ", " . ", " . "],
     ]
     return dirty_board
 

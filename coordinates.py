@@ -1,10 +1,10 @@
 import random
-from board import display_board, get_empty_board, won
+from board import display_board, won
 from menu import clear
 from clint.textui import colored
 
-HUMAN_PLAYER = " X "
-AI_PLAYER = " O "
+HUMAN_PLAY = " X "
+AI_PLAYERR = " O"
 
 def rows():
   A = "A".upper().lower()
@@ -116,16 +116,16 @@ def minimax(board, player):
     
     board[i // 3][i % 3] = player
 
-    if player == AI_PLAYER:
-      result = minimax(board, HUMAN_PLAYER)
+    if player == AI_PLAYERR:
+      result = minimax(board, HUMAN_PLAY)
     else:
-      result = minimax(board, AI_PLAYER)
+      result = minimax(board, AI_PLAYERR)
     move["score"] = result["score"]
     moves.append(move)
 
-    board[i // 3][i % 3] = move["index"]
+    board[i // 3][i % 3] = " . " #move["index"]
 
-  if player == AI_PLAYER:
+  if player == AI_PLAYERR:
     best_score = -10000
     for i in moves:
       if i["score"] > best_score:
@@ -139,18 +139,24 @@ def minimax(board, player):
         best_move = i
   return best_move
 
-def get_unbeatable_ai_coordinates():
-  pass
+def get_unbeatable_ai_coordinates(board):
+  ai_choice = minimax(board, AI_PLAYERR)
+  temp = ai_choice["index"]
+  row = temp // 3
+  column = temp % 3
+
+  return row, column
+
 
 def terminal_state(board, free):
   game_over = False
   score = None
 
-  if won(board, HUMAN_PLAYER):
+  if won(board, HUMAN_PLAY):
     game_over = True
     score = -10
   
-  elif won(board, AI_PLAYER):
+  elif won(board, AI_PLAYERR):
     game_over = True
     score = 10
 
