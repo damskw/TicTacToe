@@ -55,8 +55,6 @@ def main():
                         clear()
                         main()
                     goodbye()
-                    is_game_running = False
-                    current_player = None
 
             while current_player == " O ":
                 if not is_board_full(board):
@@ -84,9 +82,7 @@ def main():
                     if play_again:
                         clear()
                         main()
-                    goodbye()
-                    is_game_running = False
-                    current_player = None
+                    goodbye()           
 
         if game_mode == HUMAN_VS_RANDOM_AI:
             if welcome:
@@ -122,7 +118,9 @@ def main():
                         if ai_has_moved:
                             clear()
                             display_board(board)
-                            input("AI has made a move. Confirm by pressing enter. ")
+                            confirmation = input("AI has made a move. Confirm by pressing enter. ")
+                            if confirmation.lower() == "quit":
+                                goodbye()
                             ai_has_moved = False
                             clear()
                             current_player = " O "
@@ -136,8 +134,6 @@ def main():
                         clear()
                         main()
                     goodbye()
-                    is_game_running = False
-                    current_player = None
 
             while current_player == " O ":
                 if not is_board_full(board):
@@ -167,7 +163,9 @@ def main():
                         if ai_has_moved:
                             clear()
                             display_board(board)
-                            input("AI has made a move. Confirm by pressing enter. ")
+                            confirmation = input("AI has made a move. Confirm by pressing enter. ")
+                            if confirmation.lower() == "quit":
+                                goodbye()
                             ai_has_moved = False
                             clear()
                             current_player = " X "
@@ -181,8 +179,6 @@ def main():
                         clear()
                         main()
                     goodbye()
-                    is_game_running = False
-                    current_player = None
 
         if game_mode == RANDOM_AI_VS_RANDOM_AI:
             if welcome:
@@ -207,7 +203,9 @@ def main():
                             goodbye()
                     else:
                         display_board(board)
-                        input("AI has moved. Acknowledge it's movement by pressing enter. ")
+                        confirmation = input("AI has moved. Acknowledge it's movement by pressing enter. ")
+                        if confirmation.lower() == "quit":
+                            goodbye()
                         clear()
                         current_player = " O "
                 else:
@@ -239,7 +237,9 @@ def main():
                             goodbye()
                     else:
                         display_board(board)
-                        input("AI has moved. Acknowledge it's movement by pressing enter. ")
+                        confirmation = input("AI has moved. Acknowledge it's movement by pressing enter. ")
+                        if confirmation.lower() == "quit":
+                            goodbye()
                         clear()
                         current_player = " X "
                 else:
@@ -256,7 +256,7 @@ def main():
         if game_mode == HUMAN_VS_UNBEATABLE_AI:
             if welcome:
                 human_name, choice = get_player_name_and_choice()
-                current_player = choice
+                current_player = choice                
                 global AI_PLAYER
                 global HUMAN_PLAYER
                 AI_PLAYER = " X "
@@ -298,7 +298,9 @@ def main():
                         if ai_has_moved:
                             clear()
                             display_board(board)
-                            input("AI has made a move. Confirm by pressing enter. ")
+                            confirmation = input("AI has made a move. Confirm by pressing enter. ")
+                            if confirmation.lower() == "quit":
+                                goodbye()
                             ai_has_moved = False
                             clear()
                             current_player = " O "
@@ -312,8 +314,6 @@ def main():
                         clear()
                         main()
                     goodbye()
-                    is_game_running = False
-                    current_player = None
 
             while current_player == " O ":
                 if not is_board_full(board):
@@ -344,7 +344,9 @@ def main():
                         if ai_has_moved:
                             clear()
                             display_board(board)
-                            input("AI has made a move. Confirm by pressing enter. ")
+                            confirmation = input("AI has made a move. Confirm by pressing enter. ")
+                            if confirmation.lower() == "quit":
+                                goodbye()
                             ai_has_moved = False
                             clear()
                             current_player = " X "
@@ -358,9 +360,7 @@ def main():
                         clear()
                         main()
                     goodbye()
-                    is_game_running = False
-                    current_player = None
-
+                    
 def minimax(board, player):
   free = get_empty_squares(board)
 

@@ -1,6 +1,6 @@
 import random
 from board import display_board, won
-from menu import clear
+from menu import clear, goodbye
 from clint.textui import colored
 
 
@@ -49,14 +49,20 @@ def get_human_coordinates(board, player_name):
   while is_menu_presented:
     if not is_wrong_input and not are_coordinates_taken:
       coordinates = input(f"{player_name}, please enter coordinates: ")
+      if coordinates.lower() == "quit":
+        goodbye()
       is_valid_input = check_coordinates_input(coordinates)
     elif is_wrong_input and not are_coordinates_taken:
       coordinates = input(colored.red 
                     ("Invalid coordinates, please try again. "))
+      if coordinates.lower() == "quit":
+        goodbye()
       is_valid_input = check_coordinates_input(coordinates)  
     elif are_coordinates_taken:
       coordinates = input(colored.red 
                     ("These coordinates are already taken, please try again. "))
+      if coordinates.lower() == "quit":
+        goodbye()
       are_coordinates_taken = False
       is_valid_input = check_coordinates_input(coordinates) 
     if is_valid_input:
