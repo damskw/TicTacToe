@@ -1,4 +1,5 @@
 from os import system, name
+from time import sleep
 from clint.textui import colored
 import pyfiglet
 import sys
@@ -10,6 +11,12 @@ def clear():
 def show_logo():
   logo = pyfiglet.figlet_format("Tic Tac Toe")
   print(colored.yellow(logo))
+
+def loading():
+  for i in range(1, 101):
+    sleep(0.01)
+    clear()
+    print(f"\n\n\tLoading... {i}%")
 
 def goodbye():
   goodbye = pyfiglet.figlet_format("Goodbye!")

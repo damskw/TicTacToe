@@ -9,14 +9,6 @@ def get_empty_board():
     ]
     return empty_board
 
-def get_dirty_board():
-    dirty_board = [
-    [" X ", " O ", " . "],
-    [" X ", " O ", " . "],
-    [" . ", " . ", " . "],
-    ]
-    return dirty_board
-
 def display_board(board):
   print("    1", "  2", "  3")
   print("A  " + board[0][0] + "|" + board[0][1] + "|" + board[0][2])
