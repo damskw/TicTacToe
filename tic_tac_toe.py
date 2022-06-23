@@ -1,4 +1,5 @@
 from time import sleep
+import time
 from board import display_board, get_empty_board, is_board_full, get_winning_player, full_board_message, show_AI_vs_AI_winning_message, show_AI_winning_message, show_winning_message, won
 from menu import check_play_again, get_menu_option, clear, get_player_name_and_choice, get_players_names, goodbye, loading, show_AI_vs_AI_welcome_message, show_logo
 from os import system, name
@@ -11,13 +12,12 @@ RANDOM_AI_VS_RANDOM_AI = 2
 HUMAN_VS_RANDOM_AI = 3
 HUMAN_VS_UNBEATABLE_AI = 4
 
-
-
+filenames = ["logo.txt"]
 
 def main():
     loading()
     clear()
-    show_logo()
+    show_logo(filenames)
     game_mode = get_menu_option()
     board = get_empty_board()
     is_game_running = True

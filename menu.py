@@ -1,5 +1,6 @@
 from os import system, name
 from time import sleep
+import time
 from clint.textui import colored
 import pyfiglet
 import sys
@@ -8,9 +9,14 @@ def clear():
   if name == 'nt':
     _ = system('cls')
 
-def show_logo():
-  logo = pyfiglet.figlet_format("Tic Tac Toe")
-  print(colored.yellow(logo))
+def show_logo(filenames):
+  frames = []
+  for name in filenames:
+    with open(name, "r", encoding = "utf8") as f:
+      frames.append(f.readlines())
+    for frame in frames:
+      print(colored.yellow("".join(frame))) 
+  print("\n")
 
 def loading():
   for i in range(1, 101):
@@ -131,3 +137,4 @@ def get_player_name_and_choice():
     choice = " O "
 
   return player_name, choice
+
