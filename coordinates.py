@@ -3,7 +3,6 @@ from board import display_board, won
 from menu import clear, goodbye
 from clint.textui import colored
 
-
 def rows():
   A = "a"
   B = "b"
