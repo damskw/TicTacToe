@@ -14,7 +14,6 @@ def check_coordinates_input(coordinates):
   A = rows()[0]
   B = rows()[1]
   C = rows()[2]
-  row = coordinates[0]
   if len(coordinates) > 2 or len(coordinates) < 2:
     return False
   try:
@@ -22,6 +21,7 @@ def check_coordinates_input(coordinates):
      return False
   except ValueError:
     return False
+  row = coordinates[0]
   if row.upper().lower() != A and row.upper().lower() != B and row.upper().lower() != C:
     return False
   return True
