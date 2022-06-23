@@ -1,6 +1,5 @@
 from time import sleep
 from board import display_board, get_empty_board, is_board_full, get_winning_player, full_board_message, show_AI_vs_AI_winning_message, show_AI_winning_message, show_winning_message, won
-#from coordinates import * #get_empty_squares, get_human_coordinates, get_random_ai_coordinates, get_unbeatable_ai_coordinates
 from menu import check_play_again, get_menu_option, clear, get_player_name_and_choice, get_players_names, goodbye, loading, show_AI_vs_AI_welcome_message, show_logo
 from os import system, name
 from clint.textui import colored
@@ -16,9 +15,8 @@ HUMAN_VS_UNBEATABLE_AI = 4
 
 
 def main():
-    #print(AI_PLAYER)
-    #loading()
-    #clear()
+    loading()
+    clear()
     show_logo()
     game_mode = get_menu_option()
     board = get_empty_board()
@@ -111,7 +109,7 @@ def main():
                         if choice ==" X ":
                             show_winning_message(human_name)
                         else:
-                            show_AI_winning_message()
+                            show_AI_winning_message(human_name)
                         play_again = check_play_again()
                         if play_again:
                             clear()

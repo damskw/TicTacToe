@@ -10,13 +10,13 @@ def get_empty_board():
     return empty_board
 
 def display_board(board):
-  print("    1", "  2", "  3")
-  print("A  " + board[0][0] + "|" + board[0][1] + "|" + board[0][2])
-  print("   ---+---+---")
-  print("B  " + board[1][0] + "|" + board[1][1] + "|" + board[1][2])
-  print("   ---+---+---")
-  print("C  " + board[2][0] + "|" + board[2][1] + "|" + board[2][2])
-  print("   ---+---+---")
+  print("\t\t    1", "  2", "  3")
+  print("\t\tA  " + board[0][0] + "|" + board[0][1] + "|" + board[0][2])
+  print("\t\t   ---+---+---")
+  print("\t\tB  " + board[1][0] + "|" + board[1][1] + "|" + board[1][2])
+  print("\t\t   ---+---+---")
+  print("\t\tC  " + board[2][0] + "|" + board[2][1] + "|" + board[2][2])
+  print("\t\t   ---+---+---\n")
 
 def full_board_message():
   print("\t There's no more space to move! The game has ended with a tie. ")
