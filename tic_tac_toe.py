@@ -386,7 +386,7 @@ def minimax(board, player):
     move["score"] = result["score"]
     moves.append(move)
 
-    board[i // 3][i % 3] = " . " #move["index"]
+    board[i // 3][i % 3] = " . "
 
   if player == AI_PLAYER:
     best_score = -10000
